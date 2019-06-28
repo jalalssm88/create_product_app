@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+var cors = require('cors');
+
 const app = express();
 
 mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/test?retryWrites=true', {useNewUrlParser: true}, ()=>{
@@ -9,6 +11,7 @@ mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/te
 
 const Create_product = require('./api/routers/createProductRouter');
 
+app.use(cors())
 app.use(bodyParser.urlencoded({
     extended:false
 }));

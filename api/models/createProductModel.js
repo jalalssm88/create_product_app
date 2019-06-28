@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const CreateProductSchema = new Schema({
     product_name:{
         type:String,
-        require:true
+        // require:true
     },
     product_barcode:{
         type:Number,
-        required:true
+        // required:true
     },
     product_price:{
         type:Number,
-        required:true
+        // required:true
     },
     product_image:{
         type:String
