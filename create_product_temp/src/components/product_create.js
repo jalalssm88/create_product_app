@@ -5,7 +5,7 @@ import axios from 'axios';
 
 class ProductCreate extends Component {
     constructor(props){
-        super()
+        super(props)
         this.state = {
             product_name: "iPhone 5",
             product_barcode: "11555225",
@@ -22,27 +22,26 @@ class ProductCreate extends Component {
     onFileChange(e) {
         this.setState({
             product_image: e.target.files[0]})
-      }
+    }
     submitForm = (e) => {
         e.preventDefault();
-        var $form = document.getElementById('createForm');
+        // var $form = document.getElementById('createForm');
 
-        console.log('file', this.state.product_image)
-        console.log('$form', $form)
-        let data = new FormData($form);
-        // var $file = document.getElementById('file_input')
-        // console.log('$file', $file[0])
-        data.append('file', this.state.product_image)
-        // console.log('data',data)
-        console.log('===', JSON.stringify(data) )
+        // console.log('file', this.state.product_image)
+        // console.log('$form', $form)
+        // let data = new FormData($form);
+        // // var $file = document.getElementById('file_input')
+        // // console.log('$file', $file[0])
+        // data.append('file', this.state.product_image)
+        // // console.log('data',data)
+        // console.log('===', JSON.stringify(data) )
 
-        let url = '/';
         // let data = this.state
 
         axios({
-            method: 'POST',
-            url: url,
-            data:data,
+            method: 'post',
+            url: "/products/create",
+            data:this.state,
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'multipart/form-data'
