@@ -7,11 +7,11 @@ const CreateProductSchema = new Schema({
         // require:true
     },
     product_barcode:{
-        type:Number,
+        type:String,
         // required:true
     },
     product_price:{
-        type:Number,
+        type:String,
         // required:true
     },
     product_image:{

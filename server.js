@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-var cors = require('cors');
 
 const app = express();
 
@@ -9,15 +8,26 @@ mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/te
     console.log(`connected to mongo db`);
 });
 
+// mongoose.connect('mongodb://localhost/create_product_app', {useNewUrlParser:true})
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error'))
+// db.once('open', function(){
+//     console.log('db connected')
+// })
+
 const Create_product = require('./api/routers/createProductRouter');
 
-app.use(cors())
+app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({
     extended:false
 }));
 app.use(bodyParser.json());
 
+
+
 app.use('/products', Create_product)
+
+
 
 app.use((req, res, next)=> {
     const error = new Error('Not found');
