@@ -17,8 +17,6 @@ class ProductCreate extends Component {
         let data = new FormData($form);
         axios.post('/products', data)
         .then(res=>{
-            console.log('res', res.data.status)
-
             if(res.data.status == "success"){
                 this.props.history.push('/products')
             }
