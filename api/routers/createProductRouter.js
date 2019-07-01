@@ -66,7 +66,7 @@ router.get('/', (req, res, next)=>{
             data:docs.map(doc =>{
                 return {
                     _id:doc._id,
-                    product_name:doc.product_name,
+                    product_name: doc.product_name,
                     product_barcode:doc.product_barcode,
                     product_price:doc.product_price,
                     product_image:doc.product_image,
