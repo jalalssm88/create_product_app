@@ -112,7 +112,7 @@ class ProductCreate extends Component {
                                             <td>{$imagePreview}</td>
                                         </tr>
                                     }else if(key != 'file') {
-                                        return <tr>
+                                        return <tr key={index}>
                                             <td style={{'textTransform':'capitalize'}}><strong>{key.replace(/_/g, ' ')}</strong></td>
                                             <td>{this.state[key]}</td>
                                         </tr>

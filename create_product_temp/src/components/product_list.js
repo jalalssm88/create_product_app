@@ -35,8 +35,7 @@ class ProductList extends Component {
                         <Link to="/products/create" className="ui button green">Create Product</Link>
                     </div>
                 </div>
-                <div className="ui bottom attached segment">
-                    <table className="ui celled table">
+                <table className="ui celled table top attached segment"   style={{"marginTop":"-2px"}}>
                         <thead>
                             <tr>
                                 {
@@ -48,8 +47,8 @@ class ProductList extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.map( obj => {
-                                    return <tr>
+                                this.state.map( (obj, index) => {
+                                    return <tr data-key={index} key={index}>
                                             {
                                                 Object.keys(obj).map( values => {
                                                     return <td>{obj[values]}</td>
@@ -61,7 +60,6 @@ class ProductList extends Component {
                             <tr></tr>
                         </tbody>
                     </table>
-                </div>
             </div>
 
         )
