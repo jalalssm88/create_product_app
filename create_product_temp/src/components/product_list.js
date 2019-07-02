@@ -28,10 +28,8 @@ class ProductList extends Component {
     }
 
     render() {
-        console.log('productss====', this.state.products)
         const {headers} = this.state.products
         const {data} = this.state.products
-        console.log('this==', this.state.products)
         return (
             <div>
                 <div className="ui clearing header top attached segment">
@@ -57,6 +55,7 @@ class ProductList extends Component {
                                         )
                                     })
                                 }
+                                <th style={{"textTransform":"capitalize"}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +64,7 @@ class ProductList extends Component {
 
 
                                 data.map((row, index)=>{
-                                    return <tr key={index}>
+                                    return <tr key={index} data-id={row['_id']}>
                                         {
                                             Object.keys(row).map((col_key, index) => {
                                                     var dataList = row[col_key].split('.')
@@ -86,6 +85,7 @@ class ProductList extends Component {
                                                     )
                                             })
                                         }
+                                        <td><a href={`/products/update/${row['_id']}`} className="ui button icon small"><i className="icon write"></i></a></td>
                                     </tr>
                                         // return (
                                         //     ( (header != '_id')

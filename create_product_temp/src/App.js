@@ -16,6 +16,7 @@ function App() {
                     <Route exact path="/" component={WelcomeMessage} />
                     <Route exact path="/products" component={ProductList} />
                     <Route exact path="/products/create" component={ProductCreate} />
+                    <Route exact path="/products/update/:handle" component={ProductCreate} />
                 </Switch>
             </div>
         </Router>
