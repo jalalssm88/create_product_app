@@ -31,18 +31,19 @@ const CreateProduct = require('../models/createProductModel');
 
 //handler post request for create product
 router.post('/', upload.single('product_image'), (req, res)=>{
-    console.log('req body', req.body)
-    console.log('req file', req.file.path)
-    const newProduct = new CreateProduct({
-        product_name:req.body.product_name,
-        product_barcode:req.body.product_barcode,
-        product_price:req.body.product_price,
-        product_image: req.file.path
+    let productObj = {}
+    Object.keys(req.body).map( key => {
+        productObj[key] = req.body[key]
     })
+    if(req.file) {
+        productObj["product_image"] = req.file.path
+    }else{
+        productObj["product_image"] = ''
+    }
+    const newProduct = new CreateProduct(productObj)
     newProduct.save()
     .then(product => {
-        res.status(201).json({
-
+        res.status(200).json({
             status:"success",
             message: 'product successfully save to database',
         });
@@ -53,6 +54,44 @@ router.post('/', upload.single('product_image'), (req, res)=>{
        })
     })
 });
+
+
+//handler post request for create product
+router.post('/:id', upload.single('product_image'),  (req, res)=>{
+    console.log('reqest.body', req.body)
+    let updateObj = {}
+    Object.keys(req.body).map( key => {
+        updateObj[key] = req.body[key]
+    })
+    if(req.file) {
+        updateObj["product_image"] = req.file.path
+    } if(req.body.image_remove || !req.file)  {
+        productObj["product_image"] = ''
+    }
+
+    CreateProduct.findOneAndUpdate({'_id':req.params.id}, updateObj, function (err, place) {
+        console.log('place', place)
+        res.status(200).json({
+            status:"success",
+            message: 'product successfully save to database',
+        });
+    });
+});
+
+router.get('/get_product/:id', (req, res, next)=>{
+    console.log('req, res, next', req.params.id)
+    let product_id = req.params.id
+
+    CreateProduct.findById(product_id)
+    .select('_id product_name product_barcode product_price product_image')
+    .exec()
+    .then(docs => {
+        console.log('docs', docs)
+        res.status(200).json(docs)
+    })
+})
+
+
 
 
 router.get('/', (req, res, next)=>{
